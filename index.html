@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Magdalena · Mi bautismo y primer añito</title>
+  <meta name="description" content="Invitación al bautismo y primer cumpleaños de Magdalena. Domingo 29/11." />
+  <meta name="theme-color" content="#FFFBFB" />
+  <meta property="og:title" content="Magdalena · Mi bautismo y primer añito" />
+  <meta property="og:description" content="Domingo 29/11 · Ceremonia 10:00 hs. · Festejo 12 a 17 hs." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preload" href="assets/fonts/April.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="preload" href="assets/img/rabbit.png" as="image" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script>
+    (function (d) {
+      d.classList.add("js");
+      if (!window.matchMedia || !matchMedia("(prefers-reduced-motion: reduce)").matches) d.classList.add("anim");
+    })(document.documentElement);
+  </script>
+</head>
+<body>
+  <main class="invitation">
+
+    <!-- ===== HERO ===== -->
+    <header class="hero" aria-label="Magdalena, mi bautismo y primer añito">
+      <img class="hero__wash-top deco" src="assets/svg/acuarela-superior.svg" width="264" height="125" alt="" aria-hidden="true" />
+
+      <img class="hero__rabbit" src="assets/img/rabbit.png" width="1092" height="1458"
+           alt="Ilustración de una conejita en acuarela con una flor y una mariposa" />
+
+      <h1 class="hero__name">
+        <img src="assets/svg/nombre-magdalena.svg" width="246.521" height="79.4261" alt="Magdalena" />
+      </h1>
+
+      <p class="hero__desc" aria-label="mi bautismo y primer añito">
+        <span aria-hidden="true">mi bautismo</span>
+        <span aria-hidden="true">y primer a<span class="tilde-n">n<img src="assets/svg/tilde-anito.svg" width="7.52747" height="2.08869" alt="" /></span>ito</span>
+      </p>
+
+      <img class="hero__leaves deco" src="assets/svg/hojas.svg" width="250" height="107" alt="" aria-hidden="true" />
+      <img class="hero__splash deco" src="assets/svg/salpicado.svg" width="230" height="64" alt="" aria-hidden="true" />
+    </header>
+
+    <!-- ===== FOTO 1 + CEREMONIA ===== -->
+    <section class="block block--ceremonia">
+      <figure class="photo photo--1" data-reveal="img">
+        <img src="assets/img/photo1.jpg" width="640" height="960" alt="Magdalena sentada en una sillita blanca con gorro de cumpleaños" />
+      </figure>
+
+      <div class="info" id="ceremonia" data-reveal="stagger">
+        <h2 class="info__title info__title--upper">
+          <span class="info__emoji" aria-hidden="true">⛪</span>
+          <span>Ceremonia religiosa</span>
+        </h2>
+        <p class="info__text">🗓️ Domingo 29/11<br />🕐 10:00 hs.</p>
+        <p class="info__text">📍Iglesia San Francisco de Asís<br />Dirección: 14 y 153</p>
+        <a class="btn" data-link="ceremonia" href="#" target="_blank" rel="noopener">Cómo llegar</a>
+      </div>
+    </section>
+
+    <!-- ===== GRILLA DE FOTOS ===== -->
+    <section class="gallery" data-reveal="gallery" aria-label="Fotos de Magdalena">
+      <figure class="photo photo--grid"><img class="crop-a" src="assets/img/photo2.jpg" width="640" height="427" alt="Magdalena sonriendo junto a un globo" loading="lazy" /></figure>
+      <figure class="photo photo--grid"><img class="crop-b" src="assets/img/photo3.jpg" width="640" height="427" alt="Magdalena sentada entre globos" loading="lazy" /></figure>
+      <figure class="photo photo--grid"><img class="crop-b" src="assets/img/photo3.jpg" width="640" height="427" alt="" loading="lazy" /></figure>
+      <figure class="photo photo--grid"><img class="crop-a" src="assets/img/photo2.jpg" width="640" height="427" alt="" loading="lazy" /></figure>
+    </section>
+
+    <!-- ===== FESTEJO + FOTO 4 ===== -->
+    <section class="block block--festejo">
+      <div class="info info--festejo" id="festejo" data-reveal="stagger">
+        <img class="info__butterfly" src="assets/svg/mariposa.svg" width="43" height="42" alt="" aria-hidden="true" loading="lazy" />
+        <h2 class="info__title info__title--festejo">
+          <span class="info__emoji" aria-hidden="true">🥂</span>
+          <span>Luego festejamos juntos</span>
+        </h2>
+        <p class="info__text">🕐 12 a 17 hs.</p>
+        <p class="info__text info__text--address">📍 Quinta El Chañar<br />Dirección: Calle 97 (ex san Gabriel)<br />Los Talas, Berisso.</p>
+        <a class="btn" data-link="festejo" href="#" target="_blank" rel="noopener">Cómo llegar</a>
+      </div>
+
+      <figure class="photo photo--4" data-reveal="img">
+        <img src="assets/img/photo4.jpg" width="640" height="960" alt="Magdalena con anteojos de sol naranjas" loading="lazy" />
+      </figure>
+    </section>
+
+    <!-- ===== CONFIRMACIÓN ===== -->
+    <section class="confirm" id="confirmacion" data-reveal="stagger">
+      <p class="info__text confirm__text">Traé equipo de mate 🧉</p>
+      <p class="info__text confirm__text">Y no olvides confirmar asistencia a mis papis antes del 20/11</p>
+      <a class="btn btn--block" data-link="confirmar" href="#" target="_blank" rel="noopener">Confirmar asistencia</a>
+    </section>
+
+    <img class="wash-bottom deco" src="assets/svg/acuarela-inferior.svg" width="264" height="125" alt="" aria-hidden="true" loading="lazy" />
+  </main>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
