@@ -28,7 +28,6 @@
   --fs-desc: calc(19.359 * var(--u));
   --lh-desc: calc(23 * var(--u));
   --fs-btn: calc(14.686 * var(--u));
-  --lh-btn: calc(18 * var(--u));
 
   --gap: calc(20 * var(--u));
   --section-gap: calc(42 * var(--u));
@@ -64,14 +63,35 @@ h2 { font-weight: 500; }
 .deco { pointer-events: none; user-select: none; max-width: none; }
 
 /* ======================= HERO ======================= */
+/* Ocupa exactamente la pantalla visible (100vh). svh evita que en
+   Android/iOS quede tapada por la barra del navegador. */
 .hero {
+  --hero-pt: calc(120 * var(--u));
+  --hero-pb: calc(110 * var(--u));
   position: relative;
-  height: calc(644 * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  height: 100svh;
+  /* resguardo para pantallas muy bajas: nunca se pisa el contenido */
+  min-height: calc(333.0625 * var(--u) + var(--hero-pt) + var(--hero-pb));
+  padding: var(--hero-pt) 0 var(--hero-pb);
 }
 
-.hero > * { position: absolute; }
+.hero > .deco { position: absolute; }
 
-/* Los elementos centrales se ubican respecto al centro (x - 180) */
+/* Conejita + nombre + descripción: bloque centrado vertical y
+   horizontalmente; adentro se respetan las posiciones de Figma
+   (origen en x = 0, y = 149.4375 del diseño). */
+.hero__content {
+  position: relative;
+  flex: none;
+  width: calc(360 * var(--u));
+  height: calc(333.0625 * var(--u));
+}
+.hero__content > * { position: absolute; }
+
 .hero__wash-top {
   top: 0;
   right: 0;
@@ -80,8 +100,8 @@ h2 { font-weight: 500; }
 }
 
 .hero__rabbit {
-  top: calc(149.4375 * var(--u));
-  left: calc(50% + (100.6875 - 180) * var(--u));
+  top: 0;
+  left: calc(100.6875 * var(--u));
   width: calc(141.75 * var(--u));
   height: calc(189.2596 * var(--u));
   object-fit: cover;
@@ -89,8 +109,8 @@ h2 { font-weight: 500; }
 }
 
 .hero__name {
-  top: calc(347.86 * var(--u));
-  left: calc(50% + (63.1875 - 180) * var(--u));
+  top: calc(198.4225 * var(--u));
+  left: calc(63.1875 * var(--u));
   width: calc(246.375 * var(--u));
   height: calc(79.426 * var(--u));
   line-height: 0;
@@ -98,8 +118,8 @@ h2 { font-weight: 500; }
 .hero__name img { width: 100%; height: 100%; }
 
 .hero__desc {
-  top: calc(436.5 * var(--u));
-  left: calc(50% + (114.375 - 180) * var(--u));
+  top: calc(287.0625 * var(--u));
+  left: calc(114.375 * var(--u));
   width: calc(132 * var(--u));
   font-size: var(--fs-desc);
   line-height: var(--lh-desc);
@@ -122,14 +142,14 @@ h2 { font-weight: 500; }
 
 .hero__leaves {
   left: 0;
-  top: calc(537.1875 * var(--u));
+  bottom: 0;
   width: calc(249.75 * var(--u));
   height: calc(106.875 * var(--u));
 }
 
 .hero__splash {
   right: calc(-0.25 * var(--u));
-  top: calc(581 * var(--u));
+  bottom: 0;
   width: calc(230.25 * var(--u));
   height: calc(63.1378 * var(--u));
 }
@@ -219,14 +239,17 @@ h2 { font-weight: 500; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: calc(8.49 * var(--u)) calc(19.505 * var(--u)) calc(8.49 * var(--u)) calc(19.735 * var(--u));
-  min-height: calc(34.981 * var(--u));
+  height: 40px;
+  /* Centrado óptico en Y: con line-height 1, la fuente April deja las
+     mayúsculas 0.0945em por encima del centro (ascent 843 / descent 277 /
+     cap 755). El padding superior de 0.189em lo compensa exacto. */
+  padding: 0.189em calc(19.62 * var(--u)) 0;
   border-radius: calc(22.833 * var(--u));
   background: var(--btn);
   color: var(--white);
   font-family: inherit;
   font-size: var(--fs-btn);
-  line-height: var(--lh-btn);
+  line-height: 1;
   text-decoration: none;
   white-space: nowrap;
   -webkit-tap-highlight-color: transparent;
@@ -280,7 +303,8 @@ h2 { font-weight: 500; }
 }
 
 /* ---------- HERO: secuencia de apertura ---------- */
-.anim .hero > *,
+.anim .hero > .deco,
+.anim .hero__content > *,
 .anim .hero__desc > span,
 .anim .tilde-n img {
   transition-property: opacity, translate, filter, clip-path, scale;
@@ -403,9 +427,7 @@ h2 { font-weight: 500; }
 @media (min-width: 1024px) {
   :root { --u: 1.35px; --section-gap: 96px; }
 
-  .hero { height: calc(600 * var(--u)); }
-  .hero__leaves { top: calc(493 * var(--u)); }
-  .hero__splash { top: calc(537 * var(--u)); }
+  .hero { --hero-pt: 48px; --hero-pb: 48px; }
 
   .block {
     width: min(100% - 96px, 1040px);

@@ -43,11 +43,31 @@ const CONFIG = {
     el.style.setProperty("--i", (i % 2) + Math.floor(i / 2));
   });
 
-  // Apertura del hero: espera la fuente para que el texto no "salte"
+  // Resuelve cuando todas las imágenes del elemento terminaron de cargar
+  // (o fallaron). Así ninguna foto se "revela" vacía mientras descarga.
+  const imagesReady = (el) => {
+    const imgs = el.tagName === "IMG" ? [el] : [...el.querySelectorAll("img")];
+    return Promise.all(
+      imgs.map((img) => {
+        if (img.complete && img.naturalWidth) {
+          return img.decode ? img.decode().catch(() => {}) : Promise.resolve();
+        }
+        // si es lazy, forzamos la descarga ahora que está por verse
+        if (img.loading === "lazy") img.loading = "eager";
+        return new Promise((r) => {
+          img.addEventListener("load", r, { once: true });
+          img.addEventListener("error", r, { once: true });
+        });
+      })
+    );
+  };
+  const timeout = (ms) => new Promise((r) => setTimeout(r, ms));
+
+  // Apertura del hero: espera la fuente y la conejita para que nada "salte"
   const hero = document.querySelector(".hero");
   const openHero = () => requestAnimationFrame(() => requestAnimationFrame(() => hero.classList.add("is-in")));
   const fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
-  Promise.race([fontsReady, new Promise((r) => setTimeout(r, 1200))]).then(openHero);
+  Promise.race([Promise.all([fontsReady, imagesReady(hero)]), timeout(2500)]).then(openHero);
 
   // Revelado al hacer scroll
   const targets = document.querySelectorAll("[data-reveal], .wash-bottom");
@@ -59,8 +79,10 @@ const CONFIG = {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("is-in");
-          io.unobserve(entry.target);
+          const el = entry.target;
+          io.unobserve(el);
+          // máximo 4 s de espera: con conexión muy lenta se muestra igual
+          Promise.race([imagesReady(el), timeout(4000)]).then(() => el.classList.add("is-in"));
         }
       });
     },
